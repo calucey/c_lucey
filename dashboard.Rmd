@@ -1,0 +1,75 @@
+---
+title: "dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    source_code: embed
+---
+```{r setup, include = FALSE}
+library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+library(flexdashboard)
+
+```
+ 
+```{r data cleaning}
+
+data("instacart")
+
+
+
+```
+
+
+ Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Reorder Frequency
+
+```{r}
+
+freq = 
+  instacart %>%
+  #filter(reordered == 1, department %in% c("produce", "meat seafood")) %>% 
+  filter(department == "produce") %>% 
+  group_by(product_name) %>%
+  summarise(n_ordered = n()) %>% 
+  filter(n_ordered >= 2000) %>% 
+  mutate(avg_ordered = mean(n_ordered),
+         norm = n_ordered - avg_ordered) %>% 
+  mutate(product_name = forcats::fct_reorder(product_name, norm)) %>% 
+  mutate(sign = ifelse(norm < 0, "neg", "pos"))
+
+
+#%>% 
+  #pivot_wider(names_from = department, values_from = n_ordered)
+
+freq %>% 
+  ggplot(aes(x = product_name, y = norm, fill = sign)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(name = "Order Frequency",
+                    labels = c("Above Average", "Below Average"),
+                    values = c("pos" = "#00ba38", "neg" = "#f8766d" )) +
+  coord_flip()
+           
+  
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+
+```
+
+### Chart C
+
+```{r}
+
+```
+ 

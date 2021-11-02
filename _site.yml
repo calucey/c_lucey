@@ -3,12 +3,16 @@ output_dir: "."
 navbar:
   title: "Home"
   right:
-    - text: "About"
-      href: about.html
-    - icon: fa-envelope fa-lg
-      href: mailto:<you@youremail.com>
-    - icon: fa-github fa-lg
-      href: http://github.com/<YOUR_GH_NAME>/
+    - text: "Curriculum Vitae"
+      href: CV.html
+    - text: "Dashboard: Instacart Data"
+      href: dashboard.html
+    - icon: fa-envelope-square fa-lg
+      href: mailto:<cml2270@cumc.columbia.edu>
+    - icon: fa-github-square fa-lg
+      href: http://github.com/calucey/
+    - icon: fab fa-linkedin fa-lg
+      href: https://www.linkedin.com/in/catherine-lucey-695718148 
 output:
   html_document:
-    theme: cerulean
+    theme: paper
